@@ -1,15 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-
-import reducer from './reducers'
+import { configureStore } from '@reduxjs/toolkit'
 import App from './components/App'
+import {counterSlice} from './counter/counter'
 
-// 作成されたReducerをもとにstoreを作成
-const store = createStore(reducer)
+const store = configureStore({reducer: counterSlice.reducer})
 
-// Providerによって、storeがどのコンポーネントからも参照できるようになる
 ReactDOM.render(
   <Provider store={store}>
     <App />
