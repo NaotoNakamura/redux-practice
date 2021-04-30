@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 
 import reducer from './reducers'
 import App from './components/App'
+import Another from './components/Another'
 
 // 作成されたReducerをもとにstoreを作成
 const store = createStore(reducer)
@@ -13,6 +14,7 @@ const store = createStore(reducer)
 ReactDOM.render(
   <Provider store={store}>
     <App />
+    <Another/>
   </Provider>,
   document.getElementById('root')
 );
