@@ -1,16 +1,21 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { counterSlice } from '../counter/counter';
+import React, { createContext, useReducer } from "react";
+import { counterReducer } from '../counter/counter'
+import Another from './Another'
+import { increment, decrement } from "../actions";
+
+export const CounterContext = createContext();
 
 const App = () => {
-  const value = useSelector((state) => state.value)
-  const dispatch = useDispatch();
-  const { increment, decrement } = counterSlice.actions;
+  const initialState = { value: 0 }
+  const [state, dispatch] = useReducer(counterReducer, initialState);
   return (
     <>
-      <div>count:{value}</div>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
+      <CounterContext.Provider value={{state, dispatch}}>
+        <div>count:{state.value}</div>
+        <button onClick={() => dispatch(increment())}>+</button>
+        <button onClick={() => dispatch(decrement())}>-</button>
+        <Another/>
+      </CounterContext.Provider>
     </>
   );
 }
